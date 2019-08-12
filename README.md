@@ -7,7 +7,7 @@ This repository is a usable, publicly available tutorial for analyzing different
 
 The variant calling workflow begins with quality control and alignment, similar to the other NGS applications. Alignment is followed by alignment clean-up to prepare data for variant calling. Then, variant calling is performed, followed by filtering and annotation of the variant calls.
 
-![var_calling_workflow](../img/variant_calling_workflow.png)
+![var_calling_workflow](/img/variant_calling_workflow.png)
 
 ## Set-up
 
@@ -56,7 +56,6 @@ $ cp /UCHC/PublicShare/VariantWorkshop/reference/chr20.fa ~/var-calling/referenc
 To explore the variant calling workflow, we will be using a subset of a human WGS dataset attained from the [Genome in a Bottle Consortium (GIAB)](http://jimb.stanford.edu/giab). 
 
 ![](/img/genome_in_a_bottle.jpeg)
-<img src="../img/genome_in_a_bottle.jpeg" width="500">
 
 GIAB was initiated in 2011 by the National Institute of Standards and Technology "to develop the technical infrastructure (reference standards, reference methods, and reference data) to enable translation of whole human genome sequencing to clinical practice" [[1](http://jimb.stanford.edu/giab/)].
 
@@ -66,6 +65,7 @@ The human WGS dataset we will be using in class was completed by GIAB and is "es
 
 The source DNA, known as NA12878, was taken from a single person: the daughter in a father-mother-child 'trio' (she is also mother to 11 children of her own) [[4](http://www.nature.com/nmeth/journal/v12/n10/fig_tab/nmeth.3505_SF4.html)]. Father-mother-child 'trios' are often sequenced to utilize genetic links between family members. 
 
+![](/img/na12878_tree.jpg)
 <img src="../img/na12878_tree.jpg" width="700">
 
 While the sample NA12878 was sequenced at a depth of 300x, we will only be using a **subset of the dataset aligning to chromosome 20**. The sequencing files we will be using for NA12878 sample will have a total of **~4 million paired-end reads**. 
@@ -247,15 +247,15 @@ reference_data/chr20 \
 
 The last stage of the alignment phase is marking duplicates, and it is usually only required for variant calling. We need to find reads that are likely artifacts from the PCR amplification as they can bias variant calls.
 
-![align_cleanup](../img/workflow_cleanup.png)
+![align_cleanup](/img/workflow_cleanup.png)
 
 If duplicates aren't marked, then the PCR-based errors will be picked up again and again as false positive variant calls. Duplicates are easy to detect: since they have the same mapping information and CIGAR string:  
 
-![dedup1](../img/dedup_begin.png)
+![dedup1](/img/dedup_begin.png)
 
 Marking duplicates with tools such as *Picard* or *samblaster* will result in the variant caller ignoring these PCR-based errors, and instead seeing:
 
-![dedup1](../img/dedup_end.png)
+![dedup1](/img/dedup_end.png)
 
 The variant caller will be more likely to discard the error, instead of calling it as a variant.
 
@@ -293,7 +293,7 @@ The description of base options for the `SortSam` tool:
 * `SORT_ORDER`:	Sort order of output file Required. Possible values: {unsorted, queryname, coordinate, duplicate}
 * `VALIDATION_STRINGENCY`: Validation stringency for all SAM files read by this program. Possible values: {STRICT, LENIENT, SILENT}
 	
-> **NOTE:** BWA can produce SAM records that are marked as unmapped but have non-zero MAPQ and/or non-"*" CIGAR. Typically this is because BWA found an alignment for the read that hangs off the end of the reference sequence. Picard considers such input to be invalid. In general, this error can be suppressed in Picard programs by passing VALIDATION_STRINGENCY=LENIENT or VALIDATION_STRINGENCY=SILENT [[3](https://sourceforge.net/p/picard/wiki/Main_Page/)]. 
+> **NOTE:** BWA can produce SAM records that are marked as unmapped but have non-zero MAPQ and/or non-"\*" CIGAR. Typically this is because BWA found an alignment for the read that hangs off the end of the reference sequence. Picard considers such input to be invalid. In general, this error can be suppressed in Picard programs by passing VALIDATION_STRINGENCY=LENIENT or VALIDATION_STRINGENCY=SILENT [[3](https://sourceforge.net/p/picard/wiki/Main_Page/)]. 
 
 ```bash
 $ cd results/bwa
@@ -340,6 +340,7 @@ $ samtools index na12878_sorted_marked.bam
 
 We have the aligned and cleaned up the data, and have a BAM file ready for calling variants. 
 
+![](/img/variant_calling_workflow_2.png)
 <img src="../img/variant_calling_workflow_2.png" width="450">
 
 Some of the more popular tools for calling variants include [SAMtools mpileup](http://samtools.sourceforge.net/mpileup.shtml), [the GATK suite](https://www.broadinstitute.org/gatk/about/) and [FreeBayes](https://github.com/ekg/freebayes#freebayes-a-haplotype-based-variant-detector) ([Garrison and Marth, 2012](http://arxiv.org/abs/1207.3907)). While it can be useful to work through the [GATK Best Practices](https://software.broadinstitute.org/gatk/best-practices/) we will be using FreeBayes in this module as it is just as sensitive and precise, but has no license restrictions. After calling variants, we will filter out low quality variants using *[vcftools](https://vcftools.github.io/index.html)*, a toolkit designed to work with Variant Call Format or VCF files.
@@ -352,9 +353,9 @@ Some of the more popular tools for calling variants include [SAMtools mpileup](h
 
 > "FreeBayes is haplotype-based, in the sense that it calls variants based on the literal sequences of reads aligned to a particular target, not their precise alignment. This model is a straightforward generalization of previous ones (e.g. PolyBayes, samtools, GATK) which detect or report variants based on alignments. This method avoids one of the core problems with alignment-based variant detection--- that identical sequences may have multiple possible alignments:"
 
-<img src="../img/freebayes_2.png" width="600">
+<img src="/img/freebayes_2.png" width="600">
 ---
-<img src="../img/freebayes_1.png" width="200">
+<img src="/img/freebayes_1.png" width="200">
 
 > "FreeBayes uses short-read alignments (BAM files with Phred+33 encoded quality scores, now standard) for any number of individuals from a population and a reference genome (in FASTA format) to determine the most-likely combination of genotypes for the population at each position in the reference. It reports positions which it finds putatively polymorphic in variant call file (VCF) format. It can also use an input set of variants (VCF) as a source of prior information, and a copy number variant map (BED) to define non-uniform ploidy variation across the samples under analysis."
 
@@ -393,11 +394,11 @@ VCF is a text format. It usually has several header lines before the actual data
 
 Often the header lines will have some explanation about the various columns in the VCF, including the confusing looking INFO column. Here's an explanation of the INFO column for the first entry in the example above (the example below is representing the same variant as above, "rs6054257", but the VCF was excerpted from a much larger experiment):
 
-<img src="../img/vcf_3.png" width="600">
+<img src="/img/vcf_3.png" width="600">
 
 Below is another example with slightly different fields in the INFO column:
 
-<img src="../img/vcf_2.png" width="600">
+<img src="/img/vcf_2.png" width="600">
 
 Now, let's take a look at the one we just generated:
 
@@ -461,11 +462,11 @@ Now we are *(almost)* ready to annotate this VCF with known information from dbS
 
 Variant annotation is a crucial step in linking sequence variants with changes in phenotype. Annotation results can have a strong influence on the ultimate conclusions of disease studies. Incorrect or incomplete annotations can cause researchers both to overlook potentially disease-relevant DNA variants and to dilute interesting variants in a pool of false positives. 
 
-<img src="../img/variant_calling_workflow_3.png" width="450">
+<img src="/img/variant_calling_workflow_3.png" width="450">
 
 At this stage, we have a large tab-delimited file containing loci at which a variation was found in the sample DNA sequence relative to the reference. We have filtered out these variations (also referred to as 'variant calls') to keep only those we are highly confident in, and now need to find out more. We can do this by **comparing our variants against known variants, and also use genome annotations to help predict information about our variants.** 
 
-<img src="../img/prioritize.png" width="200">
+<img src="/img/prioritize.png" width="200">
 
 
 ### Setting up
@@ -492,7 +493,7 @@ $ mkdir ~/var-calling/results/annotation
 
 Variant annotation is the process of assigning information to DNA variants. There are many different types of information that can be associated with variants, and a first commonly used resource is using databases which contain variants that have previously been described. One popular example is [dbSNP](http://www.ncbi.nlm.nih.gov/SNP/),a free, public archive for genetic variation within and across different species. It is hosted by NCBI in collaboration with NHGRI and although the name implies SNPs; it actually includes range of molecular variation.
 
-<img src="../img/dbsnp.png" width="500">
+<img src="/img/dbsnp.png" width="500">
 
 To add dbSNP information you need to download the organism specific data using their FTP download. **We have already done this for you** and was the zip file that you copied over into your `reference_data` folder. 
 
@@ -534,7 +535,7 @@ One fundamental level of variant annotation involves categorising each variant b
 
 Our understanding of the protein-coding sequences in the genome is summarised in the set of transcripts we believe to exist. Thus, **variant annotation depends on the set of transcripts used as the basis for annotation**. The widely used annotation databases and browsers – ENSEMBL, RefSeq, UCSC – contain sets of transcripts that can be used for variant annotation, as well as a wealth of information of many other kinds as well, such as ENCODE data about the function of non-coding regions of the genome. SnpEff will take information from the provided annotation database and populate our VCF file by adding it into the `INFO` field name `ANN`. Data fields are encoded separated by pipe sign "\|"; and the order of fields is written in the VCF header.
 
-<img src="../img/snpeff.png" width="700">
+<img src="/img/snpeff.png" width="700">
 
 Some **common annotations** are listed below, but [the manual](http://snpeff.sourceforge.net/SnpEff_manual.html#input)
 provides a more comprehensive list.
@@ -602,13 +603,13 @@ A sample report is provided "snpEff_summary.html" if for some reason you fail to
 
 Let's scroll through the report. The first part of the report is a summary, which outlines what was run and what was found.
 
-<img src="../img/snpeff_summary3.png">
+<img src="/img/snpeff_summary3.png">
 
 As we scroll through the report, we can obtain more details on the categories of variants in our file. 
 
 There is a section **summarizing variant by type**:
 
-<img src="../img/snpeff_bytype.png">
+<img src="/img/snpeff_bytype.png">
 
 These different types are defined as follows:
 
@@ -623,7 +624,7 @@ These different types are defined as follows:
 
 Additionally, variants are **categorized by their 'impact'**: {High, Moderate, Low, Modifier}. These impact levels are [pre-defined categories](http://snpeff.sourceforge.net/SnpEff_manual.html#input) based on the 'Effect' of the variant, to help users find more significant variants. 
 
-<img src="../img/snpeff_byimpact.png">
+<img src="/img/snpeff_byimpact.png">
 
 ***
 

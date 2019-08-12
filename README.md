@@ -65,8 +65,7 @@ The human WGS dataset we will be using in class was completed by GIAB and is "es
 
 The source DNA, known as NA12878, was taken from a single person: the daughter in a father-mother-child 'trio' (she is also mother to 11 children of her own) [[4](http://www.nature.com/nmeth/journal/v12/n10/fig_tab/nmeth.3505_SF4.html)]. Father-mother-child 'trios' are often sequenced to utilize genetic links between family members. 
 
-![](/img/na12878_tree.jpg)
-<img src="../img/na12878_tree.jpg" width="700">
+<img src="/img/na12878_tree.jpg" width="700">
 
 While the sample NA12878 was sequenced at a depth of 300x, we will only be using a **subset of the dataset aligning to chromosome 20**. The sequencing files we will be using for NA12878 sample will have a total of **~4 million paired-end reads**. 
 

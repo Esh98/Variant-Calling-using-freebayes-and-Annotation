@@ -55,6 +55,7 @@ $ cp /UCHC/PublicShare/VariantWorkshop/reference/chr20.fa ~/var-calling/referenc
 
 To explore the variant calling workflow, we will be using a subset of a human WGS dataset attained from the [Genome in a Bottle Consortium (GIAB)](http://jimb.stanford.edu/giab). 
 
+![](/img/genome_in_a_bottle.jpeg)
 <img src="../img/genome_in_a_bottle.jpeg" width="500">
 
 GIAB was initiated in 2011 by the National Institute of Standards and Technology "to develop the technical infrastructure (reference standards, reference methods, and reference data) to enable translation of whole human genome sequencing to clinical practice" [[1](http://jimb.stanford.edu/giab/)].

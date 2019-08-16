@@ -474,7 +474,9 @@ We are going to stick with using only the quality score for today's class:
 	
 ```bash
 $ vcftools --vcf na12878.vcf --minQ 20 --recode --recode-INFO-all --out na12878_q20  
-```
+``` 
+Full slurm script is called [vcftools_filter.sh](/06_variants/vcftools_filter.sh) which can be found in **06_variants/** folder.  
+
 
 > "`--recode` : These options are used to generate a new file in either VCF or BCF from the input VCF or BCF file after applying the filtering options specified by the user. The output file has the suffix ".recode.vcf" or ".recode.bcf". By default, the INFO fields are removed from the output file, as the INFO values may be invalidated by the recoding (e.g. the total depth may need to be recalculated if individuals are removed). This behavior may be overriden by the following options. By default, BCF files are written out as BGZF compressed files."
 > 

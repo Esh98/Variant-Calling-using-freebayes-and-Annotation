@@ -183,10 +183,10 @@ Depending on read length, BWA has different modes optimized for different sequen
 
 ### Aligning reads with BWA-MEM
 
-Change directories into the `reference_data` directory:
+Change directories into the `02_reference_data` directory:
 
 ```bash
-$ cd ~/var-calling/reference_data
+$ cd ../02_reference_data
 ```
 
 #### Creating BWA-MEM index
@@ -198,17 +198,17 @@ The basic options for indexing the genome using BWA are:
 * `-p`: prefix for all index files
 
 ```bash
-$ module load gcc/6.2.0 bwa/0.7.8
+$ module load bwa/0.7.17
 
 $ bwa index -p chr20 chr20.fa
 ```
 
 #### Aligning reads with BWA-MEM
 
-Now that we have our indexes created, we can get started with read alignment. Change directories to the `var-calling` folder:
+Now that we have our indexes created, we can get started with read alignment. Change directories to the **05_align** folder:
 
 ```bash
-$ cd ../
+$ cd ../05_align/
 ```
 
 We will perform alignment on our paired-end reads for sample `na12878`. Details on BWA and its functionality can be found in the [user manual](http://bio-bwa.sourceforge.net/bwa.shtml); we encourage you to peruse through to get familiar with all available options.

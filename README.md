@@ -299,15 +299,19 @@ The description of base options for the `SortSam` tool:
 	
 > **NOTE:** BWA can produce SAM records that are marked as unmapped but have non-zero MAPQ and/or non-"\*" CIGAR. Typically this is because BWA found an alignment for the read that hangs off the end of the reference sequence. Picard considers such input to be invalid. In general, this error can be suppressed in Picard programs by passing VALIDATION_STRINGENCY=LENIENT or VALIDATION_STRINGENCY=SILENT [[3](https://sourceforge.net/p/picard/wiki/Main_Page/)]. 
 
-```bash
-$ cd results/bwa
+working directory will be **05_align/** 
 
-$ java -Xmx8G -jar $PICARD/picard-2.8.0.jar SortSam \
-INPUT=na12878.sam \
-OUTPUT=na12878_sorted.sam \
-SORT_ORDER=coordinate \
-VALIDATION_STRINGENCY=SILENT
+```bash
+module load picard/2.9.2
+java -Xmx8G -jar $PICARD SortSam \
+        INPUT=na12878.sam \
+        OUTPUT=na12878_sort.sam \
+        SORT_ORDER=coordinate \
+        VALIDATION_STRINGENCY=SILENT
+
 ```
+The full slrum script is called [picard_sort.sh](/05_align/picard_sort.sh) and it can be found in the **05_align** directory.  
+
 
 #### Marking duplicates
 The *Picard* tool, `MarkDuplicates`, can locate and tag duplicate reads (both PCR and optical/sequencing-driven) in a BAM or SAM file, where duplicate reads are defined as originating from the same original fragment of DNA. Explanation of the process of determining duplicate reads is provided in the [user manual](http://broadinstitute.github.io/picard/command-line-overview.html#Tools).

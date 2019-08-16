@@ -102,9 +102,12 @@ In order to evalaute the general quality of reads in the file we will be using F
 #SBATCH --qos=general
 
 module load fastqc 
-fastqc -o  ~/var-calling/fastqc  ~/var-calling/raw_data/NA12878_20_paired_1.fq ~/var-calling/raw_data/NA12878_20_paired_2.fq
+fastqc -o fastqc -o . ../01_raw_data/NA12878_20_paired_1.fq ../01_raw_data/NA12878_20_paired_2.fq  
 </strong>
 </pre>
+
+The full slurm scrip is called [fastqc.sh](/03_fastqc/fastqc.sh) which can be found in **03_fastqc/** folder.   
+
 
 ### Quality control using sickle
 Sickle performs quality control on illumina paired-end and single-end short read data using a sliding window. As the window slides along the fastq file, the average score of all the reads contained in the window is calculated. Should the average window score fall beneath a set threshold, <a href="https://github.com/najoshi/sickle/blob/master/README.md">sickle</a> determines the reads responsible and removes them from the run. After visiting the SRA pages for our data, we see that our data are single end reads. Let's find out what sickle can do with these:

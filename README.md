@@ -164,7 +164,10 @@ fastqc -o ../03_fastqc/ trimmed_NA12878_20_paired_1.fq trimmed_NA12878_20_paired
 </pre>
 <br>
 <pre style="color: silver; background: black;">-bash-4.2$ sbatch sickle.sh </pre>  
-The full slurm script is called [sickle.sh](/04_trimmed_reads/sickle.sh) is located in **04_trimmed_reads/** folder.   
+  
+
+The full slurm script is called [sickle.sh](/04_trimmed_reads/sickle.sh)  is located in **04_trimmed_reads/** folder.   
+
 
 
 

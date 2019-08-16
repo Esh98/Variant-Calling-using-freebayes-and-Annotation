@@ -231,19 +231,21 @@ Additionally we will specify:
 
 * the path to genome indexes including prefix
 * FASTQ files for paired-end reads
-* `2>`: save standard error to file
-* `>`: save alignment output to a SAM file
+* `.err`: save standard error to file
+* `-o`: save alignment output to a SAM file
 
  >**NOTE:** BWA will soft-clip poor quality sequences from the ends of the reads by default, so we do not need to specify a parameter to perform soft clipping.
 
 ```bash
-
+module load bwa/0.7.17
 bwa mem -M -t 2 \
-reference_data/chr20 \
-~/var-calling/raw_data/NA12878_20_paired_1.fq ~/var-calling/raw_data/NA12878_20_paired_2.fq \
-2> logs/bwa.err \
-> results/bwa/na12878.sam
+        ../02_reference_data/chr20 \
+        ../04_trimmed_reads/trimmed_NA12878_20_paired_1.fq ../04_trimmed_reads/trimmed_NA12878_20_paired_2.fq \
+        -o na12878.sam
 ```
+
+The complete slurm script is called [bwa_align](/05_align/bwa_align.sh) which can be found in the **05_align/** folder.  
+
 
 ### Alignment clean-up
 
@@ -269,19 +271,19 @@ In addition to usual information it gives some information about how to use it.
 
 ```
 To use, type
-      java -jar $PICARD/picard-2.8.0.jar [options]
+      java -jar $PICARD [options]
 ```
 
 Java tools usually have a `.jar` executable file and it needs to be run using `java -jar` as well as the full path to the executable file. *You can check what is stored in the `$PICARD` environment variable, before and after you load the module.*
 
 ```bash
-$ module load picard/2.8.0
+$ module load picard/2.9.2
 ```
 
 Let's check what options or specific tools are available to us with *Picard*:
 
 ```bash
-$ java -jar $PICARD/picard-2.8.0.jar
+$ java -jar $PICARD
 ```
 
 #### Sorting SAM by coordinates

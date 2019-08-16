@@ -13,18 +13,22 @@ The variant calling workflow begins with quality control and alignment, similar 
 
 Before we start with variant calling, we need to set-up our directory structure, and make sure the tools are readily available. 
 
-Login to Xanadu and start an interactive session with four cores:
+Login to Xanadu and start an interactive session with four cores: 
+> NOTE 
+> If you are using your own user account in the xanadu cluster plese use:
+> -p general --qos=general  
+> Otherwise for workshop perposes please use the following:
 
 ```
-$ srun --pty -p cbcworkshop --qos=cbcworkshop --mem 8G -c 2 bash
+$ srun --pty -p mcbstudent --qos=mcbstudent --mem 8G -c 2 bash
 ```
 
-Create the following directory structure for the variant calling project in your home directory:
+If the folder structure has not been created for you by the admin, please create the following directory structure for the variant calling project in your home directory:
 
 ```bash
-~/var-calling/
-    ├── logs/
-    ├── meta/
+Variant-Calling-using-freebayes-and-Annotation/
+    ├── 01_raw_data
+    ├── 02_reference_data
     ├── fastqc/
     ├── trimmed_reads/
     ├── raw_data/
@@ -37,18 +41,18 @@ Create the following directory structure for the variant calling project in your
 With the `-p` option of the `mkdir` command, we create the above structure very quickly:
 
 ```bash
-$ mkdir ~/var-calling
-$ cd ~/var-calling
+$ mkdir -p Variant-Calling-using-freebayes-and-Annotation
+$ cd Variant-Calling-using-freebayes-and-Annotation
 
-$ mkdir -p raw_data reference_data scripts logs meta results/bwa fastqc trimmed_reads
+$ mkdir -p 01_raw_data 02_reference_data scripts logs meta results/bwa fastqc trimmed_reads
 ```
 
 Now that we have the directory structure created, let's copy over the data to perform our quality control and alignment, including our fastq files and reference data files:
 
 ```bash
-$ cp /UCHC/PublicShare/VariantWorkshop/data/*fq ~/var-calling/raw_data/
+$ cp /UCHC/PublicShare/VariantWorkshop/data/*fq ./01_raw_data/
 
-$ cp /UCHC/PublicShare/VariantWorkshop/reference/chr20.fa ~/var-calling/reference_data/
+$ cp /UCHC/PublicShare/VariantWorkshop/reference/chr20.fa ./02_reference_data/
 ```
 
 ## Dataset

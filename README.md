@@ -13,7 +13,7 @@ The variant calling workflow begins with quality control and alignment, similar 
 
 Before we start with variant calling, we need to set-up our directory structure, and make sure the tools are readily available. 
 
-Login to Xanadu and start an interactive session with four cores: 
+Login to Xanadu and start an interactive session with two processors: 
 > NOTE 
 > If you are using your own user account in the xanadu cluster plese use:
 > -p general --qos=general  

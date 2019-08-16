@@ -379,18 +379,26 @@ Some of the more popular tools for calling variants include [SAMtools mpileup](h
 
 ### Running FreeBayes
 
+Change the working directory to the **06_variants/** folder, if this is not created make sure to create it using the `mkdir` command, and then change the directory to that folder.
+
+
 ```bash
-$ mkdir ~/var-calling/results/variants
-$ cd ~/var-calling/results/variants/
+cd ../06_variants/
 
 module load freebayes/1.1.0
 
-$ freebayes -h
+freebayes -h
 ```
 
 ```bash
-$ freebayes -f ~/var-calling/reference_data/chr20.fa ~/var-calling/results/bwa/na12878_sorted_marked.bam > ~/var-calling/results/variants/na12878.vcf
+module load freebayes/1.1.0
+
+freebayes -f ../02_reference_data/chr20.fa \
+        ../05_align/na12878_sort_marked.bam > na12878.vcf 
 ```
+
+The full slurm script is called [freebayes_variants.sh](/06_variants/freebayes_variants.sh) which can be found in **06_variants/** folder.  
+
 
 ### Variant Call Format (VCF)
 

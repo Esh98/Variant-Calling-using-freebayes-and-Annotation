@@ -88,19 +88,6 @@ In order to evalaute the general quality of reads in the file we will be using F
 
 
 <pre style="color: silver; background: black;">
-#!/bin/bash
-#SBATCH --job-name=sickle_run
-#SBATCH --mail-user=
-#SBATCH --mail-type=ALL
-#SBATCH -n 1
-#SBATCH -N 1
-#SBATCH -c 1
-#SBATCH --mem=10G
-#SBATCH -o sickle_run_%j.out
-#SBATCH -e sickle_run_%j.err
-#SBATCH --partition=general
-#SBATCH --qos=general
-
 module load fastqc 
 fastqc -o fastqc -o . ../01_raw_data/NA12878_20_paired_1.fq ../01_raw_data/NA12878_20_paired_2.fq  
 </strong>

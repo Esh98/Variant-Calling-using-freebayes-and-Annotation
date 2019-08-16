@@ -198,10 +198,18 @@ The basic options for indexing the genome using BWA are:
 * `-p`: prefix for all index files
 
 ```bash
-$ module load bwa/0.7.17
+module load bwa/0.7.17
+bwa index -p chr20 chr20.fa
+```  
 
-$ bwa index -p chr20 chr20.fa
+At the same time, we will create a fasta file index for the reference genome using samtools:  
+```bash
+module load samtools/1.7
+samtools faidx chr20.fa
 ```
+
+The full slurm script is called [index.sh](/02_reference_data/index.sh) which can be found in the **02_reference_data** folder.  
+
 
 #### Aligning reads with BWA-MEM
 
@@ -229,7 +237,8 @@ Additionally we will specify:
  >**NOTE:** BWA will soft-clip poor quality sequences from the ends of the reads by default, so we do not need to specify a parameter to perform soft clipping.
 
 ```bash
-$ bwa mem -M -t 2 \
+
+bwa mem -M -t 2 \
 reference_data/chr20 \
 ~/var-calling/raw_data/NA12878_20_paired_1.fq ~/var-calling/raw_data/NA12878_20_paired_2.fq \
 2> logs/bwa.err \

@@ -325,25 +325,35 @@ The basic options for marking duplicates are:
 * `VALIDATION_STRINGENCY`: Validation stringency for all SAM files read by this program. Default value: STRICT. Possible values: {STRICT, LENIENT, SILENT}
 
 ```bash
-$ java -Xmx8G -jar $PICARD/picard-2.8.0.jar MarkDuplicates \
-INPUT=na12878_sorted.sam \
-OUTPUT=na12878_sorted_marked.bam \
-METRICS_FILE=metrics.txt \
-ASSUME_SORTED=true \
-VALIDATION_STRINGENCY=SILENT
+module load picard/2.9.2
+java -Xmx8G -jar $PICARD MarkDuplicates \
+        INPUT=na12878_sort.sam \
+        OUTPUT=na12878_sort_marked.bam \
+        METRICS_FILE=metrics.txt \
+        ASSUME_SORTED=true \
+        VALIDATION_STRINGENCY=SILENT 
+
 ```
 
 > We use `java -Xmx8G` in the command above to make sure that Java stays within the memory limits we have asked SLURM for. If you are marking duplicates in a large file, it is not unheard of to set up your script or interactive session with over 40G of memory.
+
+The slurm script is called [picard_markduplicates.sh](/05_align/picard_markduplicates.sh) which can also be found in **05_align/** folder.  
+  
 
 #### Creating index for BAM file
 
 Now that we have a sorted BAM file that has duplicates marked, let's index it for visualization with IGV. As we have done in previous sessions, we will use *Samtools* to create the index. We will first need to the load the module:
 
 ```bash
-$ module load gcc/6.2.0 samtools/1.9
+$ module load samtools/1.9
 
-$ samtools index na12878_sorted_marked.bam
+$ samtools index na12878_sorted_marked.bam na12878_sort_marked.bami
 ```
+
+The full script is called [samtools_index.sh](/05_align/samtools_index.sh) which can also be found in **05_align/** folder.  
+
+
+
 ## Variant Calling
 
 We have the aligned and cleaned up the data, and have a BAM file ready for calling variants. 

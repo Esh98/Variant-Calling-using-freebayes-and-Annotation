@@ -96,7 +96,9 @@ fastqc -o fastqc -o . ../01_raw_data/NA12878_20_paired_1.fq ../01_raw_data/NA128
 The full slurm scrip is called [fastqc.sh](/03_fastqc/fastqc.sh) which can be found in **03_fastqc/** folder.   
 
 
-### Quality control using sickle
+### Quality control using sickle  
+Now change the working directory to **04_trimmed_reads**:  
+
 Sickle performs quality control on illumina paired-end and single-end short read data using a sliding window. As the window slides along the fastq file, the average score of all the reads contained in the window is calculated. Should the average window score fall beneath a set threshold, <a href="https://github.com/najoshi/sickle/blob/master/README.md">sickle</a> determines the reads responsible and removes them from the run. After visiting the SRA pages for our data, we see that our data are single end reads. Let's find out what sickle can do with these:
 
 <pre style="color: silver; background: black;">-bash-4.2$ module load sickle
@@ -141,33 +143,28 @@ Once we have performed data trimming we will recheck the quality of data using f
 
 Let's put all of this together for our sickle script using our downloaded fastq files:
 
-<pre style="color: silver; background: black;">-bash-4.2$ nano sickle_run.sh
+```
+nano sickle.sh
+```  
 
-                                                                                             
-
-#!/bin/bash
-#SBATCH --job-name=sickle_run
-#SBATCH --mail-user=
-#SBATCH --mail-type=ALL
-#SBATCH -n 1
-#SBATCH -N 1
-#SBATCH -c 1
-#SBATCH --mem=10G
-#SBATCH -o sickle_run_%j.out
-#SBATCH -e sickle_run_%j.err
-#SBATCH --partition=general
-#SBATCH --qos=general
-
+<pre style="color: silver; background: black;">
 module load sickle
 
-sickle pe -t sanger -f ~/var-calling/raw_data/NA12878_20_paired_1.fq -r ~/var-calling/raw_data/NA12878_20_paired_2.fq -o ~/var-calling/trimmed_reads/trimmed_NA12878_20_paired_1.fq -p ~/var-calling/trimmed_reads/trimmed_NA12878_20_paired_2.fq -l 45 -q 25 -s ~/var-calling/trimmed_reads/singles_NA12878_20_paired_2.fq
+module load sickle
+sickle pe -t sanger \
+        -f ../01_raw_data/NA12878_20_paired_1.fq -r ../01_raw_data/NA12878_20_paired_2.fq \
+        -o trimmed_NA12878_20_paired_1.fq -p trimmed_NA12878_20_paired_2.fq \
+        -l 45 \
+        -q 25 \
+        -s singles_NA12878_20_paired_2.fq  
 
-fastqc -t 4 -o  ~/var-calling/fastqc ~/var-calling/trimmed_reads/trimmed_NA12878_20_paired_1.fq ~/var-calling/trimmed_reads/trimmed_NA12878_20_paired_2.fq
+module load fastqc
+fastqc -o ../03_fastqc/ trimmed_NA12878_20_paired_1.fq trimmed_NA12878_20_paired_2.fq 
 
-                                                                                            
 </pre>
 <br>
-<pre style="color: silver; background: black;">-bash-4.2$ sbatch sickle_run.sh </pre>
+<pre style="color: silver; background: black;">-bash-4.2$ sbatch sickle.sh </pre>  
+The full slurm script is called [sickle.sh](/04_trimmed_reads/sickle.sh) is located in **04_trimmed_reads/** folder.   
 
 
 

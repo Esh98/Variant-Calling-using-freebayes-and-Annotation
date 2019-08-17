@@ -514,6 +514,19 @@ Let's also create a new directory for the results of our annotation steps called
 $ mkdir 07_annotation
 ```
 
+So now the folder structure will look like:  
+```
+Variant-Calling-using-freebayes-and-Annotation/
+├── 01_raw_data
+├── 02_reference_data
+├── 03_fastqc
+├── 04_trimmed_reads
+├── 05_align
+├── 06_variants
+└── 07_annotation
+```   
+
+
 
 ## Annotation with known variants 
 

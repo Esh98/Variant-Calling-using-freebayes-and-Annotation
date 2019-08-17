@@ -499,21 +499,19 @@ At this stage, we have a large tab-delimited file containing loci at which a var
 
 ### Setting up
 
-For this section we are going to need to copy over some reference data required for annotation. Start an interactive session and move into `var-calling` directory. Then copy over the required data.
+For this section we are going to need to copy over some reference data required for annotation. Start an interactive session and move into **Variant-Calling-using-freebayes-and-Annotation/** directory. Then copy over the required data.
 
 ```
-$ srun --pty -p bcworkshop --qos=cbcworkshop --mem=20G -c 4 bash 
-$ cd ~/var-calling
+$ srun --pty -p mcbstudent --qos=mcbstudent --mem=20G bash 
 
-$ cp /UCHC/PublicShare/VariantWorkshop/reference/dbsnp.138.chr20.vcf.gz* \
-~/var-calling/reference_data/
+$ cp /UCHC/PublicShare/VariantWorkshop/reference/reference_chr20.vcf.gz* ./02_reference_data/
 
 ```
 
-Let's also create a new directory for the results of our annotation steps:
+Let's also create a new directory for the results of our annotation steps called **07_annotation/** if not created for you:
 
 ```
-$ mkdir ~/var-calling/results/annotation
+$ mkdir 07_annotation
 ```
 
 
@@ -532,7 +530,7 @@ To annotate our data with dbSNP information we wil be using [`bcftools`](https:/
 The `bcftools annotate` command allows the user to **add or remove annotations**. 
 
 ```bash
-$ module load gcc/6.2.0 bcftools/1.9
+$ module load bcftools/1.6
 
 $ bcftools annotate --help
 ```
@@ -540,23 +538,36 @@ $ bcftools annotate --help
 The annotation we wish to add and the file we are annotating must be a Bgzip-compressed and tabix-indexed file (usually VCF or BED format). Tabix indexes a tab-delimited genome position file and creates an index file (.tbi), which facilitates quick retrieval of data lines overlapping regions. *NOTE: this has already been done for our dbSNP file*
 
 ```bash
-$ bgzip ~/var-calling/results/variants/na12878_q20.recode.vcf 
-$ tabix ~/var-calling/results/variants/na12878_q20.recode.vcf.gz
+$ bgzip ../06_variants/na12878_q20.recode.vcf 
+$ tabix ../06_variants/na12878_q20.recode.vcf.gz
 ```
 
-> Both `bgzip` and `tabix` are not available on O2 as modules, we are using bcbio's installations of these tools.
+> Both `bgzip` and `tabix` are not available on Xanadu as standalone modules, but its provided through `samtools` installation.
 
 When running `bcftools annotate`, we also need to specify the column(s) to carry over from the annotation file, which in our case is ID.
 
 ```bash
-$ bcftools annotate -c ID \
--a ~/var-calling/reference_data/dbsnp.138.chr20.vcf.gz \
-~/var-calling/results/variants/na12878_q20.recode.vcf.gz \
-> ~/var-calling/results/annotation/na12878_q20_annot.vcf
+bcftools annotate -c ID \
+        -a ../02_reference_data/reference_chr20.vcf.gz ../06_variants/na12878_q20.recode.vcf.gz \
+        > na12878_q20_annot.vcf
 ```
 
 Take a quick peek at the new VCF file that was generated using `less`. You should now see in the ID column `rs` ids which correspond to identifiers from dbSNP. For the variants that are not known, you will find the `.` in place of an ID indicating novelty of that sequence change.
 
+
+In the inital vcf file of `na12878_q20.recode.vcf` which is before annotation:  
+```
+#CHROM  POS     ID      REF     ALT     QUAL
+chr20   61795   .       G       T       95.0616
+```  
+
+The vcf file `na12878_q20_annot.vcf`, which is after annotation:  
+```
+#CHROM  POS     ID      	REF     ALT     QUAL
+chr20   61795   rs4814683       G       T       95.0616
+```  
+ 
+   
 ## Functional annotation with SnpEff
 
 One fundamental level of variant annotation involves categorising each variant based on its relationship to coding sequences in the genome and how it may change the coding sequence and affect the gene product. To do this we will be using a tool called [SnpEff](http://snpeff.sourceforge.net/), a **variant effect predictor program**. 

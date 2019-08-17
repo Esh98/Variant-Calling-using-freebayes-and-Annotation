@@ -659,13 +659,13 @@ A sample report is provided "snpEff_summary.html" if for some reason you fail to
 
 Let's scroll through the report. The first part of the report is a summary, which outlines what was run and what was found.
 
-<img src="/img/snpeff_summary3.png">
+<img src="/img/snpeff_summary_f.png">
 
 As we scroll through the report, we can obtain more details on the categories of variants in our file. 
 
 There is a section **summarizing variant by type**:
 
-<img src="/img/snpeff_bytype.png">
+<img src="/img/snpeff_bytype_f.png">
 
 These different types are defined as follows:
 
@@ -680,7 +680,7 @@ These different types are defined as follows:
 
 Additionally, variants are **categorized by their 'impact'**: {High, Moderate, Low, Modifier}. These impact levels are [pre-defined categories](http://snpeff.sourceforge.net/SnpEff_manual.html#input) based on the 'Effect' of the variant, to help users find more significant variants. 
 
-<img src="/img/snpeff_byimpact.png">
+<img src="/img/snpeff_byimpact_f.png">
 
 ***
 

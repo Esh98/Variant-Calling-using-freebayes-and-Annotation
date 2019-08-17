@@ -602,11 +602,9 @@ Take a look at the options available. We will be using `snpEff` to annotate our 
 
 ```bash
 
-$ cd results/annotation
+$ module load snpEff/4.3q
 
-$ module load snpEff/4.3g
-
-$ java -jar $SNPEFF/snpEff.jar -h
+$ java -jar $SNPEFF -h
 ```
 
 > `snpEff` is also a java based tool, similar to `picard` and we have to use a similar syntax to run it.
@@ -621,11 +619,11 @@ An additional parameter to add to our command is `Xmx8G`, a Java parameter to de
 The final command will look like this:
 
 ```bash
-## DO NOT RUN THIS CODE
+module load snpEff/4.3q
 
-$ java -Xmx8G -jar $SNPEFF/snpEff.jar eff hg19 \
-na12878_q20_annot.vcf \
-> na12878_q20_annot_snpEff.vcf
+java -Xmx8G -jar $SNPEFF eff \
+        -dataDir /isg/shared/databases/SnpEff/v4_3/data/ \
+        hg19 na12878_q20_annot.vcf > na12878_q20_annot_snpEff.vcf
 ```	
 
 By default snpEff downloads and install databases automatically (since version 4.0) for the organism that is specified. To see what databases are available for human you can use the `databases` command:
@@ -633,6 +631,12 @@ By default snpEff downloads and install databases automatically (since version 4
 ```bash
 $ java -jar $SNPEFF/snpEff.jar databases | grep Homo_sapiens
 ```
+
+In Xanadu cluster we do have databases created and it can be used by users with out having to download on there own. So if you have any requried databases that you would like to use please send us a request and we will download it for you.  
+
+The complete slurm script is called [snpEff.sh](/07_annotation/snpEff.sh) which can be found in **07_annotation/** directory.  
+  
+
 
 ### SnpEff Output
 

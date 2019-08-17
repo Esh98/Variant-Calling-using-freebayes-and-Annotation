@@ -29,13 +29,11 @@ If the folder structure has not been created for you by the admin, please create
 Variant-Calling-using-freebayes-and-Annotation/
     ├── 01_raw_data
     ├── 02_reference_data
-    ├── fastqc/
-    ├── trimmed_reads/
-    ├── raw_data/
-    ├── reference_data/
-    ├── scripts/
-    ├── results/
-        ├── bwa/
+    ├── 03_fastqc/
+    ├── 04_trimmed_reads/
+    ├── 05_align/
+    ├── 06_variants/
+    ├── 07_annotation/
 ```
 
 With the `-p` option of the `mkdir` command, we create the above structure very quickly:
@@ -44,7 +42,7 @@ With the `-p` option of the `mkdir` command, we create the above structure very 
 $ mkdir -p Variant-Calling-using-freebayes-and-Annotation
 $ cd Variant-Calling-using-freebayes-and-Annotation
 
-$ mkdir -p 01_raw_data 02_reference_data scripts logs meta results/bwa fastqc trimmed_reads
+$ mkdir -p 01_raw_data 02_reference_data 03_fastqc 04_trimmed_reads 05_align 06_variants 07_annotation
 ```
 
 Now that we have the directory structure created, let's copy over the data to perform our quality control and alignment, including our fastq files and reference data files:

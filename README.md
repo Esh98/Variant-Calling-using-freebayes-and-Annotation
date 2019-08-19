@@ -53,6 +53,17 @@ $ cp /UCHC/PublicShare/VariantWorkshop/data/*fq ./01_raw_data/
 $ cp /UCHC/PublicShare/VariantWorkshop/reference/chr20.fa ./02_reference_data/
 ```
 
+Once you have copied the above data the above two folders will look like:  
+```
+01_raw_data/
+├── NA12878_20_paired_1.fq
+└── NA12878_20_paired_2.fq
+
+02_reference_data/
+└── chr20.fa
+```   
+
+
 ## Dataset
 
 To explore the variant calling workflow, we will be using a subset of a human WGS dataset attained from the [Genome in a Bottle Consortium (GIAB)](http://jimb.stanford.edu/giab). 

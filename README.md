@@ -589,7 +589,7 @@ $ srun --pty -p mcbstudent --qos=mcbstudent --mem=1G bash
 $ cp /UCHC/PublicShare/VariantWorkshop/reference/reference_chr20.vcf.gz* ./02_reference_data/
 
 ```  
-This will copy the following two dbsnp files into the **02__reference_data/** folder:  
+This will copy the dbsnp file for chr20 and its tabix index into the **02__reference_data/** folder: 
 ```
 02_reference_data/
 ├── reference_chr20.vcf.gz
@@ -653,6 +653,8 @@ bcftools annotate -c ID \
         -a ../02_reference_data/reference_chr20.vcf.gz ../06_variants/na12878_q20.recode.vcf.gz \
         > na12878_q20_annot.vcf
 ```
+
+The full slurm script is called [annotation.sh](/07_annotation/annotation.sh), which is located in **07_annotation/** folder.  
 
 Take a quick peek at the new VCF file that was generated using `less`. You should now see in the ID column `rs` ids which correspond to identifiers from dbSNP. For the variants that are not known, you will find the `.` in place of an ID indicating novelty of that sequence change.
 

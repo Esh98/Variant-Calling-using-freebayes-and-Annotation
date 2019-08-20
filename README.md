@@ -363,6 +363,12 @@ java -Xmx8G -jar $PICARD SortSam \
 
 ```
 The full slrum script is called [picard_sort.sh](/05_align/picard_sort.sh) and it can be found in the **05_align** directory.  
+At the end of the run it will produce the sorted SAM file in the working directory:  
+```
+05_align/
+└── na12878_sort.sam
+```   
+  
 
 
 #### Marking duplicates
@@ -389,8 +395,14 @@ java -Xmx8G -jar $PICARD MarkDuplicates \
 
 > We use `java -Xmx8G` in the command above to make sure that Java stays within the memory limits we have asked SLURM for. If you are marking duplicates in a large file, it is not unheard of to set up your script or interactive session with over 40G of memory.
 
-The slurm script is called [picard_markduplicates.sh](/05_align/picard_markduplicates.sh) which can also be found in **05_align/** folder.  
-  
+The slurm script is called [picard_markduplicates.sh](/05_align/picard_markduplicates.sh) which can also be found in **05_align/** folder. 
+At the end of the run it will prodcue the duplicates marked file as:  
+```
+05_align/
+├── metrics.txt
+└── na12878_sort_marked.bam  
+```   
+
 
 #### Creating index for BAM file
 
@@ -403,6 +415,11 @@ $ samtools index na12878_sorted_marked.bam na12878_sort_marked.bami
 ```
 
 The full script is called [samtools_index.sh](/05_align/samtools_index.sh) which can also be found in **05_align/** folder.  
+This will create the index file :
+```
+05_align/
+└── na12878_sort_marked.bami
+```   
 
 
 

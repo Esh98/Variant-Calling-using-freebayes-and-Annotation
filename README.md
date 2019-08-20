@@ -559,7 +559,14 @@ Full slurm script is called [vcftools_filter.sh](/06_variants/vcftools_filter.sh
 > 
 > Information about `recode` adapted from the [VCFtools manual](https://vcftools.github.io/man_latest.html).
 
-Now we are *(almost)* ready to annotate this VCF with known information from dbSNP, and add functional annotation information to enable variant prioritization.
+Now we are *(almost)* ready to annotate this VCF with known information from dbSNP, and add functional annotation information to enable variant prioritization.   
+At the end of filtering of the VCF file it will produce the following file:  
+```
+06_variants/
+└── na12878_q20.recode.vcf
+```   
+
+
 
 ## Annotating variants
 

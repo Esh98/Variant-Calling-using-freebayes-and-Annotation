@@ -290,6 +290,13 @@ bwa mem -M -t 2 \
 ```
 
 The complete slurm script is called [bwa_align](/05_align/bwa_align.sh) which can be found in the **05_align/** folder.  
+At the end of the run it will produce the SAM file:  
+```
+05_align/
+└── na12878.sam
+```   
+
+
 
 
 ### Alignment clean-up

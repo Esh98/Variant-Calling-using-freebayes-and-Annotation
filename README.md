@@ -428,7 +428,6 @@ This will create the index file :
 We have the aligned and cleaned up the data, and have a BAM file ready for calling variants. 
 
 ![](/img/variant_calling_workflow_2.png)
-<img src="../img/variant_calling_workflow_2.png" width="450">
 
 Some of the more popular tools for calling variants include [SAMtools mpileup](http://samtools.sourceforge.net/mpileup.shtml), [the GATK suite](https://www.broadinstitute.org/gatk/about/) and [FreeBayes](https://github.com/ekg/freebayes#freebayes-a-haplotype-based-variant-detector) ([Garrison and Marth, 2012](http://arxiv.org/abs/1207.3907)). While it can be useful to work through the [GATK Best Practices](https://software.broadinstitute.org/gatk/best-practices/) we will be using FreeBayes in this module as it is just as sensitive and precise, but has no license restrictions. After calling variants, we will filter out low quality variants using *[vcftools](https://vcftools.github.io/index.html)*, a toolkit designed to work with Variant Call Format or VCF files.
 
@@ -466,7 +465,14 @@ freebayes -f ../02_reference_data/chr20.fa \
         ../05_align/na12878_sort_marked.bam > na12878.vcf 
 ```
 
-The full slurm script is called [freebayes_variants.sh](/06_variants/freebayes_variants.sh) which can be found in **06_variants/** folder.  
+The full slurm script is called [freebayes_variants.sh](/06_variants/freebayes_variants.sh) which can be found in **06_variants/** folder.   
+At the end of the run it will produce the VCF file called `na12878.vcf`:  
+```
+06_variants/
+└── na12878.vcf
+```   
+   
+ 
 
 
 ### Variant Call Format (VCF)
@@ -510,7 +516,7 @@ It is very important to filter out low-quality variants before moving to the ass
 Today we are going to use `vcftools` to remove entries that have calls with a quality score of lower than 20.
 
 ```bash
-$ module load gcc/6.2.0 vcftools/0.1.15
+$ module load vcftools/0.1.15
 ```
 
 The manual for `vcftools` is [available here](https://vcftools.github.io/man_latest.html), let's take a quick look at it.

@@ -726,6 +726,15 @@ $ java -jar $SNPEFF/snpEff.jar databases | grep Homo_sapiens
 In Xanadu cluster we do have databases created and it can be used by users with out having to download on there own. So if you have any requried databases that you would like to use please send us a request and we will download it for you.  
 
 The complete slurm script is called [snpEff.sh](/07_annotation/snpEff.sh) which can be found in **07_annotation/** directory.  
+This will produce the following output files:  
+```
+07_annotation/
+├── na12878_q20_annot_snpEff.vcf
+├── snpEff_genes.txt
+└── snpEff_summary.html
+```  
+As we discussed earlier you can copy the HTML file for your local computer to view using the `transfer.cam.uchc.edu`   
+ 
   
 
 

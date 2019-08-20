@@ -755,7 +755,7 @@ Each row corresponds to a gene, and each column coresponds to a different varian
 
 To look at the **HTML file**, we will need to use `scp` or FileZilla to bring it over to our local machine. 
 
-A sample report is provided "snpEff_summary.html" if for some reason you fail to produce it.
+A sample report is provided "snpEff_summary.html" in the **template_htmls/** directory, if for some reason you fail to produce it.
 
 Let's scroll through the report. The first part of the report is a summary, which outlines what was run and what was found.
 

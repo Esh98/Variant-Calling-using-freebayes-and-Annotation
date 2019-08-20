@@ -13,14 +13,14 @@ The variant calling workflow begins with quality control and alignment, similar 
 
 Before we start with variant calling, we need to set-up our directory structure, and make sure the tools are readily available. 
 
-Login to Xanadu and start an interactive session with one processors: 
+Login to Xanadu and start an interactive session with one processor: 
 > NOTE 
 > If you are using your own user account in the xanadu cluster plese use:
 > -p general --qos=general  
 > Otherwise for workshop perposes please use the following:
 
 ```
-$ srun --pty -p mcbstudent --qos=mcbstudent --mem 8G  bash
+$ srun --pty -p mcbstudent --qos=mcbstudent --mem 1G  bash
 ```
 
 If the folder structure has not been created for you by the admin, please create the following directory structure for the variant calling project in your home directory:

@@ -190,6 +190,16 @@ fastqc -o ../03_fastqc/ trimmed_NA12878_20_paired_1.fq trimmed_NA12878_20_paired
 
 The full slurm script is called [sickle.sh](/04_trimmed_reads/sickle.sh)  is located in **04_trimmed_reads/** folder.   
 
+At the end of the run it will produce the new trimmed FASTQ files and a summary of the trimmed results (in `sickle_#####.out` ) which you can view using the `less` command.  
+```
+04_trimmed_reads/
+├── sickle_282086.err
+├── sickle_282086.out
+├── singles_NA12878_20_paired_2.fq
+├── trimmed_NA12878_20_paired_1.fq
+└── trimmed_NA12878_20_paired_2.fq
+```  
+Now we will be using these trimmed files for alignment in the next step.  
 
 
 

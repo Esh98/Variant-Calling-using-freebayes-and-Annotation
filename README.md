@@ -588,7 +588,14 @@ $ srun --pty -p mcbstudent --qos=mcbstudent --mem=1G bash
 
 $ cp /UCHC/PublicShare/VariantWorkshop/reference/reference_chr20.vcf.gz* ./02_reference_data/
 
+```  
+This will copy the following two dbsnp files into the **02__reference_data/** folder:  
 ```
+02_reference_data/
+├── reference_chr20.vcf.gz
+└── reference_chr20.vcf.gz.tbi
+```   
+
 
 Let's also create a new directory for the results of our annotation steps called **07_annotation/** if not created for you:
 

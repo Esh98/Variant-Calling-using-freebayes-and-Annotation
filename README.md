@@ -111,8 +111,10 @@ scp USER_NAME@transfer.cam.uchc.edu:/--FULL_PATH_TO_YOUR_FILES--/NA12878_20_pair
 
 As an example:
 ```bash
-scp USER_NAME@transfer.cam.uchc.edu:/UCHC/PublicShare/Variant_Detection_Tutorials/Variant-Calling-using-freebayes-and-Annotation/03_fastqc/NA12878_20_paired_1_fastqc.html  
+scp USER_NAME@transfer.cam.uchc.edu:/UCHC/PublicShare/Variant_Detection_Tutorials/Variant-Calling-using-freebayes-and-Annotation/03_fastqc/NA12878_20_paired_1_fastqc.html .  
 ```   
+>Don't forget the period "." at the end of the copy command.  
+
  
 
 

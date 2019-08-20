@@ -240,7 +240,20 @@ module load samtools/1.7
 samtools faidx chr20.fa
 ```
 
-The full slurm script is called [index.sh](/02_reference_data/index.sh) which can be found in the **02_reference_data** folder.  
+The full slurm script is called [index.sh](/02_reference_data/index.sh) which can be found in the **02_reference_data** folder. 
+
+At the end of the run it will produce the bwa index files and the FASTA file index:   
+```
+02_reference_data/
+├── chr20.fa
+├── chr20.amb
+├── chr20.ann
+├── chr20.bwt
+├── chr20.pac
+├── chr20.sa
+└── chr20.fa.fai
+```  
+   
 
 
 #### Aligning reads with BWA-MEM

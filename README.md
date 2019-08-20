@@ -581,10 +581,10 @@ At this stage, we have a large tab-delimited file containing loci at which a var
 
 ### Setting up
 
-For this section we are going to need to copy over some reference data required for annotation. Start an interactive session and move into **Variant-Calling-using-freebayes-and-Annotation/** directory. Then copy over the required data.
+For this section we are going to need to copy over some reference data required for annotation. If your are not using a interactive session at this moment then, start an interactive session and move into **Variant-Calling-using-freebayes-and-Annotation/** directory. Then copy over the required data to the **./02_reference_data/** directory.
 
 ```
-$ srun --pty -p mcbstudent --qos=mcbstudent --mem=20G bash 
+$ srun --pty -p mcbstudent --qos=mcbstudent --mem=1G bash 
 
 $ cp /UCHC/PublicShare/VariantWorkshop/reference/reference_chr20.vcf.gz* ./02_reference_data/
 
@@ -596,7 +596,7 @@ Let's also create a new directory for the results of our annotation steps called
 $ mkdir 07_annotation
 ```
 
-So now the folder structure will look like:  
+So now the folder structure should look like:  
 ```
 Variant-Calling-using-freebayes-and-Annotation/
 ├── 01_raw_data

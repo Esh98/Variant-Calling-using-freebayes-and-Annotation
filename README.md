@@ -289,7 +289,7 @@ bwa mem -M -t 2 \
         -o na12878.sam
 ```
 
-The complete slurm script is called [bwa_align](/05_align/bwa_align.sh) which can be found in the **05_align/** folder.  
+The complete slurm script is called [bwa_align.sh](/05_align/bwa_align.sh) which can be found in the **05_align/** folder.  
 At the end of the run it will produce the SAM file:  
 ```
 05_align/
@@ -411,7 +411,7 @@ Now that we have a sorted BAM file that has duplicates marked, let's index it fo
 ```bash
 $ module load samtools/1.9
 
-$ samtools index na12878_sorted_marked.bam na12878_sort_marked.bami
+$ samtools index na12878_sort_marked.bam na12878_sort_marked.bami
 ```
 
 The full script is called [samtools_index.sh](/05_align/samtools_index.sh) which can also be found in **05_align/** folder.  

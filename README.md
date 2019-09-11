@@ -797,4 +797,4 @@ Use the HTML report to answer the following questions:
 
 
 
-`Acknowledgement:  The material is derived from lessons developed by members of the teaching team at the Harvard Chan Bioinformatics Core (HBC).`
+`Acknowledgement:  The material is derived from lessons developed by members of the teaching team at the Harvard Chan Bioinformatics Core (HBC). https://github.com/hbctraining `
